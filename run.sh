@@ -6,11 +6,13 @@ sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILE
     -e "s/^post_max_size.*/post_max_size = ${PHP_POST_MAX_SIZE}/" \
     -e "s/^expose_php.*/expose_php = Off/" /etc/php5/apache2/php.ini
 
+sed -i 's/short_open_tag = Off/short_open_tag = On/g' /etc/php5/apache2/php.ini
+
 if [[ ! -d $VOLUME_HOME/mysql ]]; then
     echo "=> An empty or uninitialized MySQL volume is detected in $VOLUME_HOME"
     echo "=> Installing MySQL ..."
     mysql_install_db > /dev/null 2>&1
-    echo "=> Done!"  
+    echo "=> Done!"
     /create_mysql_admin_user.sh
 else
     echo "=> Using an existing volume of MySQL"
