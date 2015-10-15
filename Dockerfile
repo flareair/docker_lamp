@@ -40,9 +40,8 @@ RUN chmod 755 /*.sh
 ADD config/virtualhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
-#Enviornment variables to configure php
-ENV PHP_UPLOAD_MAX_FILESIZE 10M
-ENV PHP_POST_MAX_SIZE 10M
+# Add php.ini
+ADD config/php.ini /etc/php5/apache2/php.ini
 
 # Add volumes for MySQL
 VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
