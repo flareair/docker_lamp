@@ -12,5 +12,8 @@ else
     echo "=> Using an existing volume of MySQL"
 fi
 
-chmod 777 -R /var/www/html
+chown -R www-data:www-data /var/www/html
+chmod 755 -R /var/www/html
+chmod g+s /var/www/html
+
 exec supervisord -n
